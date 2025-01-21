@@ -50,3 +50,18 @@ const tuotteet = [
       "toimittajanLinkki": "http://leipomotoimittaja.com"
     }
   ];
+  //function jokaa laskee kate
+  function laskeKate(ostohinta, myyntihinta) {
+    const kate = ((myyntihinta - ostohinta) / ostohinta) * 100;
+    return kate;
+  }
+  for (let i = 0; i < tuotteet.length; i++) {
+    const tuote = tuotteet[i];
+    const kate = laskeKate(tuote.ostohinta, tuote.myyntihinta);
+    console.log(`Tuote: ${tuote.tuotenimi}`);
+    console.log(`Kate: ${kate.toFixed(2)}%`);
+    console.log(`Toimittajan linkki: ${tuote.toimittajanLinkki}`);
+    console.log("----------------------------------------");
+    tuote.kate = kate.toFixed(2);
+    console.log(tuote);
+  }
