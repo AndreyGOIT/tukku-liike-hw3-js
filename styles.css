@@ -11,7 +11,6 @@
     background-color: #666;
     padding: 20px;
     text-align: center;
-    font-size: 35px;
     color: white;
   }
   
@@ -32,15 +31,24 @@
   
   /* Style the list inside the menu */
   nav ul {
-    list-style-type: none;
+    /* list-style-type: none; */
+    list-style-type: circle;
     padding: 0;
+  }
+  #links {
+    padding-left: 3rem;
   }
   
   /* Style the content */
-  article {
+  .container {
+    display: flex; /* Järjestää sisäkkäiset elementit (artikkeli ja tbl) riviksi */
+    flex-direction: column;
     -webkit-flex: 3;
     -ms-flex: 3;
     flex: 3;
+  }
+  
+  article {
     background-color: #f1f1f1;
     padding: 10px;
   }
@@ -60,3 +68,22 @@
       flex-direction: column;
     }
   }
+  
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    padding: 12px;
+    border: 1px solid;
+  }
+  td {
+    text-align: center;
+  }
+  tr:hover {background-color: lightgrey;}
+  th {
+    background-color: #5a8c7a;
+    color: white;
+  }
+  tr:nth-child(even) {background-color: #e4e1e1;}

@@ -1,4 +1,4 @@
-//JSON-dataa
+/*--------------------- JSON-dataa ---------------------*/
 const tuotteet = [
     {
       "tuotekoodi": "T001",
@@ -50,6 +50,7 @@ const tuotteet = [
       "toimittajanLinkki": "http://leipomotoimittaja.com"
     }
   ];
+  /*------------------------- KATE:en käsittely -------------------------------*/
   //function jokaa laskee kate
   function laskeKate(ostohinta, myyntihinta) {
     const kate = ((myyntihinta - ostohinta) / ostohinta) * 100;
@@ -64,8 +65,10 @@ const tuotteet = [
     // console.log(`Toimittajan linkki: ${tuote.toimittajanLinkki}`);
     // console.log("----------------------------------------");
     tuote.kate = kate.toFixed(2);
-    console.log(tuote);
+    //console.log(tuote);
   }
+
+/*----------------------- TUOTTEET taulukko--------------------------------*/
 let x = "";
   //JavaScript-funktio haeAutot alkaa...
   function haeTuottet() {
@@ -86,5 +89,68 @@ let x = "";
   } //JavaScript-funktio haeTuottet loppu...
   haeTuottet(); //kutsuu funktiota
 
+/*----------------------- TOIMITTAJAN linkit --------------------------------*/
+//versio 1
+/*let toimLinkkiArray = []; //taulukko, johon lisätään toimittajien linkit
+for (let i = 0; i < tuotteet.length; i++) {
+    toimLinkkiArray.push(tuotteet[i].toimittajanLinkki);
+}
+console.log(toimLinkkiArray);
+const uniikkiLinkit = [...new Set(toimLinkkiArray)]; //poistaa toistot
+console.log(uniikkiLinkit);
+function haeToimittajat() {
+    let list = document.createElement("ul");
+    for (let i = 0; i < uniikkiLinkit.length; i++) {
+      let item = document.createElement("li");
+      let link = document.createElement("a");
+      link.href = uniikkiLinkit[i];
+      link.textContent = uniikkiLinkit[i];
+      link.target = "_blank";
+      item.appendChild(link);
+      list.appendChild(item);
+    }
+    document.getElementById("links").innerHTML = list.innerHTML;
+}
+haeToimittajat();*/
+//versio 2
+function haeToimittajat() {
+     // Saamme kontin linkkejä varten
+     const linkkialue = document.getElementById("links");
+     
+     const list = document.createElement("ul");
 
-  //<a href='http://" + myObj.cars[i].link + "' target=blank>" + myObj.cars[i].link + "</a>
+     // Tarkistaa olemassa olevia linkkejä
+     const linkit = document.getElementsByClassName("tuotelinkit");
+ 
+     tuotteet.forEach((tuote) => {
+         let alreadyExists = false;
+ 
+         // Tarkistetaan linkin olemassaoloa
+         for (let j = 0; j < linkit.length; j++) {
+             if (
+                 linkit[j].href === tuote.toimittajanLinkki ||
+                 linkit[j].href === tuote.toimittajanLinkki + "/"
+             ) {
+                 alreadyExists = true;
+                 break;
+             }
+         }
+ 
+         // Jos linkkiä ei vielä ole, luo se
+         if (!alreadyExists) {
+             const link = document.createElement("a");
+             link.href = tuote.toimittajanLinkki;
+             link.textContent = tuote.toimittajanLinkki;
+             link.target = "_blank";
+             link.className = "tuotelinkit";
+ 
+             const listItem = document.createElement("li");
+             listItem.style.marginBottom = "10px";
+             listItem.appendChild(link);
+             list.appendChild(listItem);
+          }
+          linkkialue.appendChild(list);
+     });
+  }
+  
+  haeToimittajat();
