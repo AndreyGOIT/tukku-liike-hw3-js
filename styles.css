@@ -52,6 +52,17 @@
     background-color: #f1f1f1;
     padding: 10px;
   }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #96b4a9;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
   
   /* Style the footer */
   footer {
